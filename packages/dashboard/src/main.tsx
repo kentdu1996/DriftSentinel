@@ -40,8 +40,8 @@ function App() {
       <header className="hero">
         <div>
           <p className="eyebrow">DriftSentinel</p>
-          <h1>模型与中转站的实时质量情报网络</h1>
-          <p className="sub">看见哪些服务正在出问题，公共网络如何评价，以及你的 Agent 应该避开哪里。</p>
+          <h1>模型与中转站的实时质量监控</h1>
+          <p className="sub">实时发现变差的模型 / 中转站，自动把 Agent 切到健康节点。</p>
         </div>
         <div className="hero-actions">
           <button
@@ -50,9 +50,9 @@ function App() {
             onClick={() => withBusy(setBusy, async () => {
               await runCycle();
               setVersion((v) => v + 1);
-            }, setNotice, "评测已开始，真实模型结果会通过实时事件陆续刷新。")}
+            }, setNotice, "检测已开始，结果会陆续刷新。")}
           >
-            立即评测一轮
+            立即检测一次
           </button>
           <button
             disabled={busy}
@@ -60,9 +60,9 @@ function App() {
               await demoInject({ mode: "swap_model" });
               await runCycle();
               setVersion((v) => v + 1);
-            }, setNotice, "已模拟中转站降级，并启动真实评测。")}
+            }, setNotice, "已模拟中转站变差，正在重新检测。")}
           >
-            模拟中转站降级
+            模拟中转站变差
           </button>
           <button
             disabled={busy}
@@ -70,18 +70,18 @@ function App() {
               await demoRecover();
               await runCycle();
               setVersion((v) => v + 1);
-            }, setNotice, "已恢复注入状态，并完成一轮评测。")}
+            }, setNotice, "已恢复正常，并完成一次检测。")}
           >
-            恢复
+            恢复正常
           </button>
           <button
             disabled={busy}
             onClick={() => withBusy(setBusy, async () => {
               await demoReset();
               setVersion((v) => v + 1);
-            }, setNotice, "Demo 数据已重置。")}
+            }, setNotice, "演示数据已重置。")}
           >
-            重置 Demo
+            重置演示
           </button>
         </div>
       </header>
@@ -90,9 +90,9 @@ function App() {
 
       <nav className="tabs">
         <TabButton id="intel" tab={tab} setTab={setTab} label="实时情报" />
-        <TabButton id="ratings" tab={tab} setTab={setTab} label="评分榜" />
+        <TabButton id="ratings" tab={tab} setTab={setTab} label="质量榜" />
         <TabButton id="watch" tab={tab} setTab={setTab} label="我的关注" />
-        <TabButton id="actions" tab={tab} setTab={setTab} label="建议动作" />
+        <TabButton id="actions" tab={tab} setTab={setTab} label="自动避坑" />
         <TabButton id="evolution" tab={tab} setTab={setTab} label="进化时间线" />
         <TabButton id="developer" tab={tab} setTab={setTab} label="开发者" />
       </nav>

@@ -208,8 +208,8 @@ export function evidenceText(v: Verdict) {
   return hits
     .map((s) => {
       if (s.type === "score") return `质量分下降 ${Math.abs(s.delta).toFixed(1)}`;
-      if (s.type === "latency") return `p95 延迟上升 ${(s.delta * 100).toFixed(0)}%`;
-      if (s.type === "fingerprint") return `行为指纹漂移 ${s.delta.toFixed(2)}`;
+      if (s.type === "latency") return `延迟上升 ${(s.delta * 100).toFixed(0)}%`;
+      if (s.type === "fingerprint") return `行为指纹变化 ${s.delta.toFixed(2)}`;
       return `${s.type} 异常`;
     })
     .join("，");
@@ -218,15 +218,15 @@ export function evidenceText(v: Verdict) {
 export function signalLabel(type: string) {
   if (type === "score") return "质量下降";
   if (type === "latency") return "速度变慢";
-  if (type === "fingerprint") return "行为漂移";
+  if (type === "fingerprint") return "行为变化";
   return type;
 }
 
 export function intelSentence(v: Verdict) {
   const endpoint = endpointOf(v);
   if (v.level === "confirmed") return `${endpoint} 被确认出现降智，${evidenceText(v)}。建议暂时避开。`;
-  if (v.level === "suspect") return `${endpoint} 出现可疑波动，${evidenceText(v)}。建议继续观察。`;
-  return `${endpoint} 当前探测正常。`;
+  if (v.level === "suspect") return `${endpoint} 出现可疑迹象，${evidenceText(v)}。建议继续观察。`;
+  return `${endpoint} 当前检测正常。`;
 }
 
 export function platformLabel(platform: string) {
@@ -240,11 +240,11 @@ export function platformLabel(platform: string) {
 export function eventLabel(name: string) {
   const labels: Record<string, string> = {
     hello: "页面已连接",
-    "probe.done": "探测完成",
+    "probe.done": "检测完成",
     "drift.verdict": "异常判定",
     "gep.phase": "自愈阶段",
     "route.changed": "路由更新",
-    "evomap.published": "已发布 EvoMap",
+    "evomap.published": "已发布到公共网络",
     "consensus.reached": "共识达成",
     "evomap.vote": "群体投票",
     "evomap.report": "公评上报",

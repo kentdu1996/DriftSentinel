@@ -11,7 +11,7 @@ export function CardTitle({ title, desc }: { title: string; desc: string }) {
 }
 
 export function List({ rows }: { rows: Array<Array<string | number>> }) {
-  if (!rows.length) return <p className="empty">暂无数据。运行一轮 GEP 或等待 daemon 写入。</p>;
+  if (!rows.length) return <p className="empty">暂无数据。运行一次检测后会出现。</p>;
   return (
     <div className="list">
       {rows.map((r, i) => (
@@ -26,7 +26,7 @@ export function List({ rows }: { rows: Array<Array<string | number>> }) {
 }
 
 export function Timeline({ cycles }: { cycles: Cycle[] }) {
-  if (!cycles.length) return <p className="empty">暂无 GEP cycle。</p>;
+  if (!cycles.length) return <p className="empty">暂无检测记录。</p>;
   return (
     <ol className="timeline">
       {cycles.map((c, i) => (
@@ -71,14 +71,14 @@ export function EndpointCard({ row, onOpen }: { row: BoardRow; onOpen?: (id: str
         <b>{row.health == null ? "-" : num(row.health)}</b>
         <small>健康分</small>
         <span>长期声誉 {row.localElo}</span>
-        <span>p95 {row.latencyP95 == null ? "-" : `${num(row.latencyP95)}ms`}</span>
+        <span>延迟 {row.latencyP95 == null ? "-" : `${num(row.latencyP95)}ms`}</span>
         <span>异常 {row.driftEvents}</span>
       </div>
       {!!radar.length && <RadarChart axes={radar} />}
       <div className="endpoint-problems">
         {problems.length
           ? problems.map((p) => <span key={p.label} className={`tag ${p.status}`}>{p.label}: {p.reason}</span>)
-          : <span className="tag ok">五个方向暂未发现明显问题</span>}
+          : <span className="tag ok">五个维度都正常</span>}
       </div>
       {onOpen && <button className="link-button" onClick={() => onOpen(row.endpointId)}>查看证据链</button>}
     </div>

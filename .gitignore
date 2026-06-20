@@ -29,7 +29,7 @@ testsets/**/*.cache.json
 
 # internal deliverables / private docs (keep local, do not publish)
 0[0-9]_*.md
-1[0-5]_*.md
+1[0-9]_*.md
 TOKENPROXY_CLIENTS_DEBUG_WIKI.md
 *.pptx
 *.pdf
