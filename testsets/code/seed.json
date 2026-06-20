@@ -1,0 +1,72 @@
+[
+  {
+    "id": "code_seed_001",
+    "source": "seed",
+    "dimension": "code",
+    "difficulty": "easy",
+    "template": "Write a Python function `add(a, b)` that returns the sum of two integers. Respond with only the function in a python code block.",
+    "promptRender": "Write a Python function `add(a, b)` that returns the sum of two integers. Respond with only the function in a python code block.",
+    "grader": {
+      "type": "unit_test",
+      "spec": "assert add(2, 3) == 5\nassert add(-1, 1) == 0\nassert add(0, 0) == 0",
+      "timeoutS": 5
+    },
+    "weight": 1.0
+  },
+  {
+    "id": "code_seed_002",
+    "source": "seed",
+    "dimension": "code",
+    "difficulty": "easy",
+    "template": "Write a Python function `is_even(n)` that returns True if n is even, else False. Respond with only the function in a python code block.",
+    "promptRender": "Write a Python function `is_even(n)` that returns True if n is even, else False. Respond with only the function in a python code block.",
+    "grader": {
+      "type": "unit_test",
+      "spec": "assert is_even(4) is True\nassert is_even(7) is False\nassert is_even(0) is True",
+      "timeoutS": 5
+    },
+    "weight": 1.0
+  },
+  {
+    "id": "code_seed_003",
+    "source": "seed",
+    "dimension": "code",
+    "difficulty": "medium",
+    "template": "Write a Python function `fib(n)` that returns the nth Fibonacci number (0-indexed, fib(0)=0, fib(1)=1). Respond with only the function in a python code block.",
+    "promptRender": "Write a Python function `fib(n)` that returns the nth Fibonacci number (0-indexed, fib(0)=0, fib(1)=1). Respond with only the function in a python code block.",
+    "grader": {
+      "type": "unit_test",
+      "spec": "assert fib(0) == 0\nassert fib(1) == 1\nassert fib(10) == 55\nassert fib(12) == 144",
+      "timeoutS": 5
+    },
+    "weight": 1.5
+  },
+  {
+    "id": "code_seed_004",
+    "source": "seed",
+    "dimension": "code",
+    "difficulty": "medium",
+    "template": "Write a Python function `reverse_words(s)` that reverses the order of words in a string. Example: 'hello world' -> 'world hello'. Respond with only the function in a python code block.",
+    "promptRender": "Write a Python function `reverse_words(s)` that reverses the order of words in a string. Example: 'hello world' -> 'world hello'. Respond with only the function in a python code block.",
+    "grader": {
+      "type": "unit_test",
+      "spec": "assert reverse_words('hello world') == 'world hello'\nassert reverse_words('a b c') == 'c b a'\nassert reverse_words('single') == 'single'",
+      "timeoutS": 5
+    },
+    "weight": 1.0
+  },
+  {
+    "id": "code_seed_005",
+    "source": "seed",
+    "dimension": "code",
+    "difficulty": "hard",
+    "template": "Write a Python function `is_balanced(s)` that returns True if the brackets in s (only characters ()[]{}) are balanced and correctly nested, else False. Respond with only the function in a python code block.",
+    "promptRender": "Write a Python function `is_balanced(s)` that returns True if the brackets in s (only characters ()[]{}) are balanced and correctly nested, else False. Respond with only the function in a python code block.",
+    "grader": {
+      "type": "unit_test",
+      "spec": "assert is_balanced('()[]{}') is True\nassert is_balanced('([{}])') is True\nassert is_balanced('(]') is False\nassert is_balanced('([)]') is False\nassert is_balanced('') is True",
+      "timeoutS": 5
+    },
+    "weight": 2.0
+  }
+]

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DriftSentinel · 路演</title>
+<style>
+  :root{
+    --navy:#0b1020; --navy2:#11182e; --card:rgba(255,255,255,.04);
+    --amber:#fbbf24; --teal:#2dd4bf; --sky:#38bdf8; --violet:#a78bfa;
+    --ink:#e8edf7; --muted:#9aa6c0; --line:rgba(255,255,255,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#05070f;color:var(--ink);
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .deck{max-width:1280px;margin:0 auto;padding:32px 20px 80px}
+  .slide{position:relative;aspect-ratio:16/9;width:100%;margin:0 0 30px;
+    background:radial-gradient(1200px 600px at 80% -10%,rgba(56,189,248,.10),transparent 60%),
+               radial-gradient(900px 500px at -10% 110%,rgba(167,139,250,.10),transparent 55%),
+               linear-gradient(160deg,var(--navy),var(--navy2));
+    border:1px solid var(--line);border-radius:18px;overflow:hidden;
+    box-shadow:0 24px 60px rgba(0,0,0,.45)}
+  .pad{position:absolute;inset:0;padding:54px 64px;display:flex;flex-direction:column}
+  .kicker{font-size:15px;letter-spacing:.22em;color:var(--sky);text-transform:uppercase;font-weight:700}
+  .pageno{position:absolute;right:30px;bottom:22px;font-size:13px;color:var(--muted);letter-spacing:.1em}
+  .brandbar{position:absolute;left:0;top:0;height:5px;width:100%;
+    background:linear-gradient(90deg,var(--amber),var(--teal),var(--sky),var(--violet))}
+  h1{font-size:64px;line-height:1.05;font-weight:800;letter-spacing:-.5px}
+  h2{font-size:40px;line-height:1.15;font-weight:800;margin-bottom:6px}
+  .sub{font-size:22px;color:var(--muted);margin-top:14px;font-weight:500}
+  .big{font-size:30px;line-height:1.5;font-weight:600}
+  .grid{display:grid;gap:18px;margin-top:auto;margin-bottom:auto}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 22px}
+  .card h3{font-size:21px;margin-bottom:8px;font-weight:700}
+  .card p{font-size:16px;color:var(--muted);line-height:1.5}
+  .dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:8px;vertical-align:middle}
+  .amber{color:var(--amber)} .teal{color:var(--teal)} .sky{color:var(--sky)} .violet{color:var(--violet)}
+  .bg-amber{background:var(--amber)} .bg-teal{background:var(--teal)} .bg-sky{background:var(--sky)} .bg-violet{background:var(--violet)}
+  .flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:30px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;font-size:17px;font-weight:600}
+  .arrow{color:var(--muted);font-size:20px}
+  .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9}
+  .hero-veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,7,15,.92),rgba(5,7,15,.55) 55%,rgba(5,7,15,.2))}
+  .half{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;height:100%;align-items:center}
+  .shot{width:100%;height:100%;object-fit:cover;border-radius:14px;border:1px solid var(--line)}
+  .shotwrap{height:78%;display:flex}
+  ul.clean{list-style:none;margin-top:18px}
+  ul.clean li{font-size:20px;margin:14px 0;padding-left:26px;position:relative;color:var(--ink)}
+  ul.clean li::before{content:"";position:absolute;left:0;top:9px;width:10px;height:10px;border-radius:50%;
+    background:linear-gradient(90deg,var(--teal),var(--sky))}
+  .stat{font-size:54px;font-weight:800;letter-spacing:-1px}
+  .statlabel{font-size:16px;color:var(--muted);margin-top:4px}
+  .center{justify-content:center;align-items:flex-start}
+  .quote{font-size:34px;font-weight:700;line-height:1.4;max-width:80%}
+  .foot{margin-top:auto;font-size:15px;color:var(--muted);letter-spacing:.05em}
+  .tag{display:inline-block;font-size:14px;color:var(--ink);background:var(--card);
+    border:1px solid var(--line);border-radius:999px;padding:6px 14px;margin:4px 6px 0 0}
+  @media print{
+    body{background:#fff}.deck{padding:0;max-width:none}
+    .slide{margin:0;border-radius:0;page-break-after:always;box-shadow:none;aspect-ratio:auto;height:100vh;width:100vw}
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- 1 封面 -->
+  <section class="slide">
+    <img class="hero-img" src="../docs/assets/01_hero.jpeg" alt="">
+    <div class="hero-veil"></div>
+    <div class="pad">
+      <div class="brandbar"></div>
+      <div class="kicker">EvoTavern · Beyond the Maze · The Forge / A2A</div>
+      <div style="margin-top:auto">
+        <h1>DriftSentinel</h1>
+        <div class="sub">Agent 降智检测与自愈公评网络<br>一个 Agent 踩过的坑,变成整个网络的免疫记忆</div>
+      </div>
+      <div class="foot" style="margin-top:30px">Drift Hunters · 2026</div>
+    </div>
+    <div class="pageno">01 / 10</div>
+  </section>
+
+  <!-- 2 问题 -->
+  <section class="slide">
+    <div class="pad">
+      <div class="brandbar"></div>
+      <div class="kicker">The Problem</div>
+      <h2>模型在悄悄"降智",而 Agent 毫无察觉</h2>
+      <div class="grid g3">
+        <div class="card"><h3 class="amber">静默降配</h3><p>高峰期被偷偷换成更小更便宜的弱模型,你不会收到任何通知。</p></div>
+        <div class="card"><h3 class="teal">限流截断</h3><p>回答被压缩、被截断,质量肉眼可见地变差。</p></div>
+        <div class="card"><h3 class="sky">行为漂移</h3><p>同一个 prompt,输出风格与能力悄悄改变。</p></div>
+      </div>
+      <div class="big" style="margin-top:8px">结果:Agent 只表现为"变笨、变慢、失败率升高"。<span class="violet">更糟的是——一个 Agent 踩过的坑,别的 Agent 还会再踩一遍。</span></div>
+    </div>
+    <div class="pageno">02 / 10</div>
+  </section>
+
+  <!-- 3 解法 -->
+  <section class="slide">
+    <div class="pad">
+      <div class="brandbar"></div>
+      <div class="kicker">The Solution</div>
+      <h2>DriftSentinel:Agent 社会的降智免疫系统</h2>
+      <div class="half" style="margin-top:10px">
+        <ul class="clean">
+          <li><b>发现</b>:多维探测模型/中转站,判定降智</li>
+          <li><b>避坑</b>:确认后自动把请求路由到可靠端点</li>
+          <li><b>继承</b>:把经验发布到 EvoMap,别的节点直接避坑</li>
+          <li><b>公评</b>:多节点交叉印证,汇聚群体可信度</li>
+        </ul>
+        <div class="shotwrap"><img class="shot" src="../docs/assets/04_pitch_keyvisual.jpeg" alt=""></div>
+      </div>
+    </div>
+    <div class="pageno">03 / 10</div>
+  </section>
+
+  <!-- 4 GEP 闭环 -->
+  <section class="slide">
+    <div class="pad">
+      <div class="brandbar"></div>
+      <div class="kicker">How it works · GEP Loop</div>
+      <h2>七步自愈闭环</h2>
+      <div class="half">
+        <div class="shotwrap"><img class="shot" src="../docs/assets/05_gep_loop.jpeg" alt=""></div>
+        <div>
+          <div class="flow" style="margin-top:0">
+            <span class="step">Scan</span><span class="arrow">→</span>
+            <span class="step">Signal</span><span class="arrow">→</span>
+            <span class="step">Intent</span><span class="arrow">→</span>
+            <span class="step">Mutate</span><span class="arrow">→</span>
+            <span class="step">Validate</span><span class="arrow">→</span>
+            <span class="step">Solidify</span><span class="arrow">→</span>
+            <span class="step">Broadcast</span>
+          </div>
+          <p style="color:var(--muted);font-size:18px;margin-top:22px;line-height:1.6">
+          从持续探测、信号计算、意图判定,到生成新路由、校验、固化为可继承资产,最后经脱敏闸广播到公共网络。</p>
+        </div>
+      </div>
+    </div>
+    <div class="pageno">04 / 10</div>
+  </section>
+
+  <!-- 5 A2A 核心 -->
+  <section class="slide">
+    <div class="pad">
+      <div class="brandbar"></div>
+      <div class="kicker">The Forge · A2A 蜂群协作</div>
+      <h2>一个节点的教训,全网的免疫记忆</h2>
+      <div class="half">
+        <ul class="clean">
+          <li><b>Node A</b> 检测到中转站降智 → 发布 Gene + Capsule</li>
+          <li><b>Node B</b> 启动即继承高风险端点,<span class="amber">无需盲探</span></li>
+          <li>Node B 独立复探 → L2 共识升级为 <span class="teal">confirmed</span></li>
+          <li>两个独立节点交叉印证,可信度 <b>0.90</b></li>
+        </ul>
+        <div class="shotwrap"><img class="shot" src="../docs/assets/02_product_arch.jpeg" alt=""></div>
+      </div>
+    </div>
+    <div class="pageno">05 / 10</div>
+  </section>
+
+  <!-- 6 检测原理 -->
+  <section class="slide">
+    <div class="pad">
+      <div class="brandbar"></div>
+      <div class="kicker">Detection</div>
+      <h2>怎么"看出"降智</h2>
+      <div class="half">
+        <div class="shotwrap"><img class="shot" src="../docs/assets/07_drift_detect.jpeg" alt=""></div>
+        <div class="grid" style="gap:14px">
+          <div class="card"><h3 class="amber"><span class="dot bg-amber"></span>质量分</h3><p>多题集评测,回答质量相对基线偏移。</p></div>
+          <div class="card"><h3 class="teal"><span class="dot bg-teal"></span>延迟</h3><p>p95 延迟异常跳变。</p></div>
+          <div class="card"><h3 class="sky"><span class="dot bg-sky"></span>行为指纹</h3><p>高温采样的输出指纹漂移。</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="pageno">06 / 10</div>
+  </section>
+
+  <!-- 7 产品 Dashboard -->
+  <section class="slide">
+    <div class="pad">
+      <div class="brandbar"></div>
+      <div class="kicker">Product</div>
+      <h2>进化过程,肉眼可见</h2>
+      <div class="shotwrap" style="height:70%;margin-top:6px"><img class="shot" src="../docs/assets/06_dashboard.jpeg" alt=""></div>
+      <p style="color:var(--muted);font-size:18px;margin-top:16px">健康榜 · 五维雷达 · 端点下钻 · GEP 自愈 · 发布闸记录 · 进化时间线(检测/自愈/发布/继承四色区分)</p>
+    </div>
+    <div class="pageno">07 / 10</div>
+  </section>
+
+  <!-- 8 技术架构 -->
+  <section class="slide">
+    <div class="pad">
+      <div class="brandbar"></div>
+      <div class="kicker">Architecture</div>
+      <h2>技术架构</h2>
+      <div class="half">
+        <div class="shotwrap"><img class="shot" src="../docs/assets/03_tech_arch.jpeg" alt=""></div>
+        <div>
+          <div class="grid g2" style="gap:12px">
+            <div class="card"><h3>probe / drift-engine</h3><p>探测 · 评分 · 指纹 · 基线 · 漂移判定 · 共识</p></div>
+            <div class="card"><h3>router</h3><p>自愈路由 · swarm 双节点协作</p></div>
+            <div class="card"><h3>evomap</h3><p>A2A 客户端 · HubPort · Local/Remote Hub</p></div>
+            <div class="card"><h3>server / dashboard</h3><p>Fastify · SSE · 时间线 · React 可视化</p></div>
+          </div>
+          <p style="color:var(--muted);font-size:16px;margin-top:16px">pnpm workspace · 8 包 · TypeScript · Node 20</p>
+        </div>
+      </div>
+    </div>
+    <div class="pageno">08 / 10</div>
+  </section>
+
+  <!-- 9 完成度 -->
+  <section class="slide">
+    <div class="pad">
+      <div class="brandbar"></div>
+      <div class="kicker">Status</div>
+      <h2>已经跑通了什么</h2>
+      <div class="grid g4" style="margin:auto 0">
+        <div class="card"><div class="stat teal">8/8</div><div class="statlabel">包构建 + 类型检查通过</div></div>
+        <div class="card"><div class="stat sky">PASS</div><div class="statlabel">离线双节点协作场景</div></div>
+        <div class="card"><div class="stat violet">PASS</div><div class="statlabel">真实 Hub validate(不烧额度)</div></div>
+        <div class="card"><div class="stat amber">0.90</div><div class="statlabel">L2 共识可信度</div></div>
+      </div>
+      <p style="color:var(--muted);font-size:18px">核心引擎与路由层单测全绿 · 真实发布链路已就绪,配 Key + 开关即可上链。</p>
+    </div>
+    <div class="pageno">09 / 10</div>
+  </section>
+
+  <!-- 10 价值与愿景 -->
+  <section class="slide">
+    <div class="pad">
+      <div class="brandbar"></div>
+      <div class="kicker">Vision</div>
+      <h2>越多节点参与,价值越大</h2>
+      <div class="grid g4">
+        <div class="card"><h3 class="amber">企业 Agent 网关</h3><p>模型质量防火墙</p></div>
+        <div class="card"><h3 class="teal">模型采购监控</h3><p>量化真实服务质量</p></div>
+        <div class="card"><h3 class="sky">中转站公评</h3><p>公共质量声誉网络</p></div>
+        <div class="card"><h3 class="violet">AI SRE</h3><p>模型层可观测与止损</p></div>
+      </div>
+      <div class="quote" style="margin-top:24px">参与的节点越多,<span class="teal">对模型厂商和中转站的约束力就越强</span>,公共网络的价值就越大。</div>
+      <div class="foot">DriftSentinel · Drift Hunters · The Forge / A2A</div>
+    </div>
+    <div class="pageno">10 / 10</div>
+  </section>
+
+</div>
+</body>
+</html>

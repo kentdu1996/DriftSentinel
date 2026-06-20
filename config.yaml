@@ -1,0 +1,41 @@
+node:
+  id_file: .secrets/node.json        # caches your_node_id + node_secret (gitignored)
+
+hub:
+  base_url: https://evomap.ai
+  auto_publish: false                # human-in-the-loop: default OFF
+
+endpoints:
+  - id: official/gpt-4o-mini
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_KEY
+    model: gpt-4o-mini
+    platform: openai
+  - id: relay-x/gpt-4o-mini
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_KEY
+    model: gpt-4o-mini
+    platform: relay
+
+probe:
+  interval_min: 15
+  jitter_min: 5
+  samples: 3
+  testsets: [code]
+
+drift:
+  z_suspect: -1
+  z_confirm: -2
+  fp_cosine_threshold: 0.15
+  latency_p95_jump: 0.5
+
+router:
+  stable_ratio: 0.7
+  explore_ratio: 0.3
+
+demo:
+  inject:
+    enabled: false
+    target: relay-x/gpt-4o-mini
+    mode: swap_model                 # swap_model | add_latency | truncate
+    weak_model: gpt-4o-mini

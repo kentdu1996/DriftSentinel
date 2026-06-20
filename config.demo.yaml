@@ -1,0 +1,48 @@
+node:
+  id_file: .secrets/node.json
+
+hub:
+  base_url: https://evomap.ai
+  auto_publish: false
+
+# Offline demo config — no API keys, no credits. Uses simulated endpoints.
+endpoints:
+  - id: official/strong
+    base_url: mock://strong
+    api_key_env: NONE
+    model: gpt-strong
+    platform: mock
+  - id: relay-x/suspect
+    base_url: mock://relay
+    api_key_env: NONE
+    model: gpt-strong
+    platform: mock
+  - id: relay-b/healthy
+    base_url: mock://strong
+    api_key_env: NONE
+    model: gpt-strong
+    platform: mock
+
+probe:
+  interval_min: 15
+  jitter_min: 5
+  samples: 3
+  testsets: [code]
+
+drift:
+  z_suspect: -1
+  z_confirm: -2
+  fp_cosine_threshold: 0.15
+  latency_p95_jump: 0.5
+
+router:
+  stable_ratio: 0.7
+  explore_ratio: 0.3
+
+# Flip enabled:true and re-run to simulate the relay swapping in a weak model.
+demo:
+  inject:
+    enabled: false
+    target: relay-x/suspect
+    mode: swap_model
+    weak_model: gpt-weak-7b

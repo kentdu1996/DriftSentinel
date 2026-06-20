@@ -1,0 +1,42 @@
+# dependencies
+node_modules/
+**/node_modules/
+
+# build output
+dist/
+**/dist/
+*.tsbuildinfo
+
+# data & secrets (NEVER commit)
+data/
+.secrets/
+*.db
+*.db-shm
+*.db-wal
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+logs/
+
+# OS
+.DS_Store
+
+# testset cache (large, regenerable)
+testsets/**/*.cache.json
+
+# internal deliverables / private docs (keep local, do not publish)
+0[0-9]_*.md
+1[0-5]_*.md
+TOKENPROXY_CLIENTS_DEBUG_WIKI.md
+*.pptx
+*.pdf
+「Beyond the Maze」*.md
+.ds_backup/
+.trae/
+genes.json
+
+# git working dir (workaround for macOS .git protection)
+.gitwork/

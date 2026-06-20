@@ -1,0 +1,25 @@
+{
+  "name": "@driftsentinel/server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "start:src": "tsx src/server.ts"
+  },
+  "dependencies": {
+    "@driftsentinel/core": "workspace:*",
+    "@driftsentinel/probe": "workspace:*",
+    "@driftsentinel/drift-engine": "workspace:*",
+    "@driftsentinel/router": "workspace:*",
+    "@driftsentinel/evomap": "workspace:*",
+    "@fastify/cors": "^10.0.0",
+    "@fastify/static": "^8.0.0",
+    "fastify": "^5.0.0"
+  }
+}

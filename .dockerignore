@@ -1,0 +1,14 @@
+node_modules
+**/node_modules
+dist
+**/dist
+data
+.secrets
+*.db
+*.db-shm
+*.db-wal
+.env
+.env.*
+*.log
+logs
+driftsentinel-handoff.zip

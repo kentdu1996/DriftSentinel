@@ -1,0 +1,50 @@
+node:
+  id_file: .secrets/node.json
+
+hub:
+  base_url: https://evomap.ai
+  auto_publish: true
+
+# Real EvoMap API demo config. Requires:
+#   export EVOMAP_API_KEY="sk-evomap-..."
+endpoints:
+  - id: official/evomap-opus
+    base_url: https://api.evomap.ai/v1
+    api_key_env: EVOMAP_API_KEY
+    model: evomap-claude-opus-4-7
+    platform: openai
+  - id: relay-x/evomap-claimed-opus
+    base_url: https://api.evomap.ai/v1
+    api_key_env: EVOMAP_API_KEY
+    model: evomap-claude-opus-4-7
+    platform: relay
+  - id: relay-b/evomap-gemini
+    base_url: https://api.evomap.ai/v1
+    api_key_env: EVOMAP_API_KEY
+    model: evomap-gemini-3.1-pro-preview
+    platform: relay
+
+probe:
+  interval_min: 15
+  jitter_min: 5
+  samples: 1
+  testsets: [code]
+
+drift:
+  z_suspect: -1
+  z_confirm: -2
+  fp_cosine_threshold: 0.15
+  latency_p95_jump: 0.5
+
+router:
+  stable_ratio: 0.7
+  explore_ratio: 0.3
+
+# For live demo, this simulates a relay silently swapping the claimed Opus model
+# to another real EvoMap model. It still calls EvoMap and consumes token quota.
+demo:
+  inject:
+    enabled: false
+    target: relay-x/evomap-claimed-opus
+    mode: swap_model
+    weak_model: evomap-deepseek-v4-flash

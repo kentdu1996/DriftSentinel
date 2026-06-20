@@ -1,0 +1,15 @@
+services:
+  driftsentinel:
+    build: .
+    ports:
+      - "8787:8787"
+    environment:
+      DRIFT_DAEMON: "0"
+      DRIFT_CONFIG: config.demo.yaml
+      DRIFT_DB: data/driftsentinel-docker.db
+      PORT: "8787"
+    volumes:
+      - driftsentinel-data:/app/data
+
+volumes:
+  driftsentinel-data:

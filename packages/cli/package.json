@@ -1,0 +1,22 @@
+{
+  "name": "@driftsentinel/cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "driftsentinel": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "start": "tsx src/cli.ts"
+  },
+  "dependencies": {
+    "@driftsentinel/core": "workspace:*",
+    "@driftsentinel/probe": "workspace:*",
+    "@driftsentinel/drift-engine": "workspace:*",
+    "@driftsentinel/router": "workspace:*",
+    "@driftsentinel/evomap": "workspace:*",
+    "yaml": "^2.5.0"
+  }
+}

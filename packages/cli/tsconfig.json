@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist"
+  },
+  "references": [
+    { "path": "../core" },
+    { "path": "../probe" },
+    { "path": "../drift-engine" },
+    { "path": "../router" },
+    { "path": "../evomap" }
+  ],
+  "include": ["src/**/*"]
+}

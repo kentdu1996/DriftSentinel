@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DriftSentinel 路演展示大纲</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: rgba(8, 19, 34, .78);
+      --panel-strong: rgba(9, 24, 43, .94);
+      --line: rgba(125, 211, 252, .24);
+      --text: #e8f5ff;
+      --muted: #8fa8bd;
+      --blue: #38bdf8;
+      --cyan: #67e8f9;
+      --green: #2dd4bf;
+      --amber: #fbbf24;
+      --red: #fb7185;
+      --violet: #a78bfa;
+      --shadow: 0 28px 90px rgba(0, 0, 0, .36);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 8%, rgba(56, 189, 248, .22), transparent 30rem),
+        radial-gradient(circle at 80% 28%, rgba(45, 212, 191, .12), transparent 34rem),
+        linear-gradient(135deg, #07111f 0%, #0b1728 45%, #050914 100%);
+      font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(125, 211, 252, .07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(125, 211, 252, .07) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.85), rgba(0,0,0,.15));
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, transparent, rgba(103, 232, 249, .06), transparent);
+      height: 38vh;
+      animation: scan 7s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes scan {
+      from { transform: translateY(-45vh); }
+      to { transform: translateY(110vh); }
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      width: min(1320px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 14px 0;
+      backdrop-filter: blur(18px);
+    }
+
+    .brand { display: flex; gap: 10px; align-items: center; font-weight: 900; letter-spacing: .08em; }
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: conic-gradient(from 220deg, var(--blue), var(--green), var(--violet), var(--blue));
+      box-shadow: 0 0 28px rgba(56, 189, 248, .38);
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+    .nav a:hover { color: var(--text); background: rgba(125, 211, 252, .1); }
+    .nav-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px; }
+
+    main { width: min(1320px, calc(100vw - 40px)); margin: 0 auto 72px; }
+    section { scroll-margin-top: 92px; }
+    .hero {
+      min-height: calc(100vh - 70px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+      gap: 28px;
+      align-items: center;
+      padding: 58px 0 44px;
+    }
+
+    .eyebrow {
+      color: var(--cyan);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin: 0 0 18px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-size: clamp(48px, 7vw, 96px);
+      line-height: .92;
+      letter-spacing: -0.08em;
+      margin-bottom: 22px;
+      max-width: 900px;
+    }
+
+    h2 {
+      font-size: clamp(34px, 4vw, 58px);
+      letter-spacing: -0.06em;
+      line-height: .96;
+      margin-bottom: 16px;
+    }
+
+    h3 { font-size: 20px; margin-bottom: 10px; letter-spacing: -0.02em; }
+    p { color: var(--muted); line-height: 1.8; }
+
+    .hero-lead {
+      font-size: 20px;
+      line-height: 1.75;
+      max-width: 780px;
+      color: #cbe7f8;
+    }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0; }
+    .chip {
+      border: 1px solid var(--line);
+      color: #dff7ff;
+      border-radius: 999px;
+      padding: 9px 12px;
+      background: rgba(8, 18, 32, .62);
+      font-size: 13px;
+    }
+
+    .hero-panel, .card, .wide-card {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel-strong), rgba(5, 12, 23, .82));
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel { padding: 24px; min-height: 560px; }
+    .hero-panel::before, .card::before, .wide-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(56, 189, 248, .12), transparent 35%, rgba(45, 212, 191, .08));
+      opacity: .9;
+    }
+
+    .panel-inner { position: relative; z-index: 1; display: grid; gap: 18px; }
+    .metric-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .metric {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(3, 10, 20, .48);
+      border: 1px solid rgba(148, 163, 184, .13);
+    }
+    .metric b { display: block; font-size: 32px; color: var(--text); }
+    .metric span { display: block; color: var(--muted); font-size: 12px; margin-top: 4px; }
+
+    .radar-demo {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(3, 10, 20, .45);
+      border: 1px solid rgba(125, 211, 252, .16);
+    }
+    .radar {
+      width: 190px;
+      height: 190px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle, rgba(56, 189, 248, .18) 0 28%, transparent 29% 100%),
+        conic-gradient(from -40deg, var(--green), var(--blue), var(--red), var(--amber), var(--green));
+      mask: radial-gradient(circle, transparent 0 22%, #000 23% 100%);
+      animation: breathe 3s ease-in-out infinite;
+    }
+    @keyframes breathe { 50% { transform: scale(.96); filter: saturate(1.4); } }
+    .bars { display: grid; gap: 10px; }
+    .bar { display: grid; gap: 4px; }
+    .bar span { display: flex; justify-content: space-between; color: #cfeaff; font-size: 13px; }
+    .bar i { display: block; height: 7px; border-radius: 999px; background: #132337; overflow: hidden; }
+    .bar i::before { content: ""; display: block; height: 100%; width: var(--w); border-radius: inherit; background: linear-gradient(90deg, var(--blue), var(--green)); }
+    .bar.bad i::before { background: var(--red); }
+    .bar.warn i::before { background: var(--amber); }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 420px);
+      gap: 28px;
+      align-items: end;
+      margin: 84px 0 26px;
+    }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .card, .wide-card { padding: 22px; }
+    .card > *, .wide-card > * { position: relative; z-index: 1; }
+    .card-number { color: var(--blue); font-weight: 900; font-size: 12px; letter-spacing: .16em; margin-bottom: 14px; }
+    .card p:last-child { margin-bottom: 0; }
+
+    .problem .card:nth-child(1) { border-color: rgba(251, 113, 133, .34); }
+    .problem .card:nth-child(2) { border-color: rgba(251, 191, 36, .32); }
+    .problem .card:nth-child(3) { border-color: rgba(167, 139, 250, .34); }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(110px, 1fr));
+      gap: 10px;
+      margin-top: 22px;
+    }
+    .flow-step {
+      min-height: 118px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(3, 10, 20, .52);
+      border: 1px solid rgba(125, 211, 252, .16);
+    }
+    .flow-step strong { display: block; color: var(--cyan); margin-bottom: 8px; }
+    .flow-step span { color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .flow-step.hot { box-shadow: 0 0 30px rgba(45, 212, 191, .2); border-color: rgba(45, 212, 191, .45); }
+
+    .demo {
+      display: grid;
+      grid-template-columns: 390px minmax(0, 1fr);
+      gap: 18px;
+    }
+    .timeline { display: grid; gap: 12px; }
+    .time-step {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(3, 10, 20, .45);
+      border: 1px solid rgba(148, 163, 184, .13);
+    }
+    .time-step b { color: var(--green); }
+    .time-step strong { display: block; margin-bottom: 4px; }
+    .time-step span { color: var(--muted); line-height: 1.55; font-size: 13px; }
+
+    .stage {
+      min-height: 560px;
+      display: grid;
+      align-content: center;
+      gap: 20px;
+      border-radius: 28px;
+      padding: 28px;
+      background:
+        linear-gradient(135deg, rgba(56, 189, 248, .12), transparent 35%),
+        rgba(3, 10, 20, .58);
+      border: 1px solid rgba(125, 211, 252, .16);
+      position: relative;
+      overflow: hidden;
+    }
+    .stage::before {
+      content: "";
+      position: absolute;
+      inset: 30px;
+      border: 1px solid rgba(125, 211, 252, .16);
+      border-radius: 24px;
+    }
+
+    .fake-dashboard {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .fake-card {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(7, 17, 31, .84);
+      border: 1px solid rgba(125, 211, 252, .18);
+    }
+    .fake-card.red { border-color: rgba(251, 113, 133, .5); }
+    .fake-card.green { border-color: rgba(45, 212, 191, .44); }
+    .fake-card h4 { margin: 0 0 8px; }
+    .fake-card p { font-size: 13px; margin: 0; }
+
+    .a2a {
+      display: grid;
+      grid-template-columns: 1fr 120px 1fr 120px 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+    .node {
+      min-height: 150px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 20px;
+      border: 1px solid rgba(125, 211, 252, .2);
+      border-radius: 24px;
+      background: rgba(3, 10, 20, .5);
+    }
+    .node b { display: block; margin-bottom: 8px; font-size: 22px; }
+    .node span { color: var(--muted); line-height: 1.6; }
+    .line {
+      height: 2px;
+      background: rgba(148, 163, 184, .18);
+      overflow: hidden;
+    }
+    .line i {
+      display: block;
+      width: 48px;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      animation: fly 1.4s linear infinite;
+    }
+    @keyframes fly { from { transform: translateX(-50px); } to { transform: translateX(150px); } }
+
+    .matrix { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .status {
+      display: inline-flex;
+      margin-top: 12px;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 900;
+      background: rgba(45, 212, 191, .12);
+      color: #99f6e4;
+      border: 1px solid rgba(45, 212, 191, .22);
+    }
+    .status.warn { color: #fde68a; border-color: rgba(251, 191, 36, .3); background: rgba(251, 191, 36, .1); }
+
+    .arch {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .layer {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(3, 10, 20, .52);
+      border: 1px solid rgba(125, 211, 252, .16);
+    }
+    .layer ul { padding-left: 18px; color: var(--muted); line-height: 1.8; margin-bottom: 0; }
+
+    .evidence {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .code {
+      font-family: "SFMono-Regular", Consolas, monospace;
+      color: #b9e8ff;
+      background: rgba(2, 6, 12, .7);
+      border: 1px solid rgba(125, 211, 252, .16);
+      border-radius: 20px;
+      padding: 18px;
+      line-height: 1.8;
+      overflow: auto;
+      white-space: pre-wrap;
+    }
+
+    .closing {
+      min-height: 78vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 90px 0;
+    }
+    .closing h2 { max-width: 920px; margin-inline: auto; }
+    .closing p { max-width: 760px; margin-inline: auto; font-size: 18px; }
+
+    .quote {
+      border-left: 3px solid var(--green);
+      padding-left: 16px;
+      color: #d9f7ff;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .progress {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 3px;
+      width: 0;
+      background: linear-gradient(90deg, var(--blue), var(--green));
+      z-index: 40;
+    }
+
+    @media (max-width: 980px) {
+      .nav { position: static; display: grid; }
+      .hero, .section-head, .demo, .evidence { grid-template-columns: 1fr; }
+      .grid-3, .grid-2, .matrix, .arch { grid-template-columns: 1fr; }
+      .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .a2a { grid-template-columns: 1fr; }
+      .line { height: 30px; width: 2px; margin: 0 auto; }
+      .radar-demo { grid-template-columns: 1fr; }
+      .radar { margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <nav class="nav" aria-label="路演导航">
+    <div class="brand"><span class="brand-mark"></span><span>DRIFTSENTINEL</span></div>
+    <div class="nav-links">
+      <a href="#opening">开场</a>
+      <a href="#problem">痛点</a>
+      <a href="#loop">闭环</a>
+      <a href="#demo">Demo</a>
+      <a href="#evomap">A2A</a>
+      <a href="#architecture">架构</a>
+      <a href="#business">商业</a>
+      <a href="#evidence">证据</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="opening">
+      <div>
+        <p class="eyebrow">Beyond the Maze · The Forge A2A 蜂群协作</p>
+        <h1>Agent 社会的降智免疫系统</h1>
+        <p class="hero-lead">DriftSentinel 发现模型与中转站的静默降配，自动让 Agent 避开风险，并把一次踩坑经验压缩成 EvoMap 可继承资产。</p>
+        <div class="chips">
+          <span class="chip">检测降智</span>
+          <span class="chip">自愈路由</span>
+          <span class="chip">Agent Guard</span>
+          <span class="chip">EvoMap A2A</span>
+          <span class="chip">Gene / Capsule</span>
+        </div>
+        <p class="quote">让一个 Agent 踩过的坑，变成整个网络的免疫记忆。</p>
+      </div>
+      <aside class="hero-panel" aria-label="项目状态概览">
+        <div class="panel-inner">
+          <div class="metric-row">
+            <div class="metric"><b>7</b><span>GEP 自愈步骤</span></div>
+            <div class="metric"><b>5D</b><span>动态雷达图</span></div>
+            <div class="metric"><b>A2A</b><span>EvoMap 经验继承</span></div>
+          </div>
+          <div class="radar-demo">
+            <div class="radar" aria-hidden="true"></div>
+            <div class="bars">
+              <div class="bar" style="--w:92%"><span><b>回答质量</b><em>92</em></span><i></i></div>
+              <div class="bar warn" style="--w:68%"><span><b>响应速度</b><em>68</em></span><i></i></div>
+              <div class="bar" style="--w:88%"><span><b>稳定性</b><em>88</em></span><i></i></div>
+              <div class="bar bad" style="--w:41%"><span><b>行为一致性</b><em>41</em></span><i></i></div>
+              <div class="bar" style="--w:84%"><span><b>任务能力</b><em>84</em></span><i></i></div>
+            </div>
+          </div>
+          <div class="code">node_id: node_5b13c88c8d711d04
+config: config.evomap.yaml
+guard: /v1/chat/completions
+publish gate: sanitize → validate → publish</div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="problem">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">01 · 为什么需要它</p>
+          <h2>模型服务的坏消息，通常不会主动告诉你。</h2>
+        </div>
+        <p>Agent 正在越来越多地依赖第三方模型和中转站。问题是，一旦它们静默降配、偷换弱模型或高峰限流，Agent 会继续执行，只是质量悄悄变差。</p>
+      </div>
+      <div class="grid-3 problem">
+        <article class="card"><div class="card-number">PAIN 01</div><h3>静默降智不可见</h3><p>用户看到的是“Agent 变笨了”，但不知道是模型、供应商还是中转站出了问题。</p></article>
+        <article class="card"><div class="card-number">PAIN 02</div><h3>调用链没有免疫力</h3><p>Agent 一旦绑定坏端点，会持续踩坑，直到人工排查和换配置。</p></article>
+        <article class="card"><div class="card-number">PAIN 03</div><h3>经验无法继承</h3><p>一个节点发现某中转站有风险，其他节点仍会重复踩同一个坑。</p></article>
+      </div>
+    </section>
+
+    <section id="loop">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">02 · 核心闭环</p>
+          <h2>从检测，到自愈，再到公共经验。</h2>
+        </div>
+        <p>DriftSentinel 用质量分、延迟和行为指纹三信号交叉判断，再通过 GEP Loop 生成路由策略，最后把确认经验广播给 EvoMap。</p>
+      </div>
+      <div class="wide-card">
+        <div class="flow">
+          <div class="flow-step"><strong>Scan</strong><span>探测所有模型和中转站 endpoint。</span></div>
+          <div class="flow-step"><strong>Signal</strong><span>提取质量、延迟、指纹漂移信号。</span></div>
+          <div class="flow-step"><strong>Intent</strong><span>确认目标：避开降智服务。</span></div>
+          <div class="flow-step hot"><strong>Mutate</strong><span>生成候选自愈路由。</span></div>
+          <div class="flow-step"><strong>Validate</strong><span>holdout 验证新路由更好。</span></div>
+          <div class="flow-step"><strong>Solidify</strong><span>写入 SQLite 和 genes.json。</span></div>
+          <div class="flow-step"><strong>Broadcast</strong><span>脱敏后形成 EvoMap 资产。</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">03 · 三分钟现场 Demo</p>
+          <h2>一局演完：制造降智，发现问题，切走流量，发布经验。</h2>
+        </div>
+        <p>主力使用离线稳定版，真实 EvoMap 段用于展示 Token 消耗、validate/publish 与节点身份。网络波动时有回退话术。</p>
+      </div>
+      <div class="demo">
+        <div class="timeline">
+          <div class="time-step"><b>0:00</b><div><strong>打开首页</strong><span>三端点全绿，说明基线已经建立。</span></div></div>
+          <div class="time-step"><b>0:25</b><div><strong>模拟中转站降级</strong><span>relay-x 声称强模型，实际偷换弱模型。</span></div></div>
+          <div class="time-step"><b>0:55</b><div><strong>立即评测一轮</strong><span>雷达图变形，质量/指纹/延迟给出证据。</span></div></div>
+          <div class="time-step"><b>1:25</b><div><strong>GEP 自愈</strong><span>relay-x 权重降为 0，Agent 自动切到健康端点。</span></div></div>
+          <div class="time-step"><b>1:55</b><div><strong>EvoMap A2A</strong><span>Gene/Capsule 经脱敏闸、validate、publish。</span></div></div>
+          <div class="time-step"><b>2:25</b><div><strong>节点继承</strong><span>节点 B 读取经验，提前避开同一风险。</span></div></div>
+          <div class="time-step"><b>2:50</b><div><strong>收束价值</strong><span>这就是公共模型质量免疫网络。</span></div></div>
+        </div>
+        <div class="stage">
+          <div class="fake-dashboard">
+            <div class="fake-card green"><h4>official/strong</h4><p>健康分 96 · 可用 · 长期声誉稳定</p></div>
+            <div class="fake-card red"><h4>relay-x/suspect</h4><p>confirmed drift · 行为指纹漂移 · 建议避开</p></div>
+            <div class="fake-card green"><h4>relay-b/healthy</h4><p>被提升为推荐路由 · 70% 主流量</p></div>
+            <div class="fake-card"><h4>发布闸记录</h4><p>sanitize passed → validate accepted → published/mock</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="product">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">04 · 产品能力</p>
+          <h2>不是单点脚本，而是一套可演示的产品工程。</h2>
+        </div>
+        <p>当前工程已经覆盖 Dashboard、CLI、Agent Guard、EvoMap A2A、报告导出和 Docker 工程化收尾。</p>
+      </div>
+      <div class="matrix">
+        <article class="card"><h3>实时情报流</h3><p>把技术信号翻译成“哪个模型/中转站正在出问题”。</p><span class="status">已实现</span></article>
+        <article class="card"><h3>五维动态雷达图</h3><p>回答质量、响应速度、稳定性、行为一致性、任务能力。</p><span class="status">已实现</span></article>
+        <article class="card"><h3>端点详情页</h3><p>下钻查看历史判决、信号明细、切流时间线。</p><span class="status">已实现</span></article>
+        <article class="card"><h3>Agent Guard</h3><p>Agent 只需把 base_url 指向 DriftSentinel 的 /v1。</p><span class="status">已实现</span></article>
+        <article class="card"><h3>自动脱敏发布闸</h3><p>发布前自动扫描敏感字段，阻断 prompt、key、邮箱。</p><span class="status">已实现</span></article>
+        <article class="card"><h3>CLI Report / Docker</h3><p>能导出 Markdown/JSON 报告，也提供容器化配置。</p><span class="status warn">工程化收尾</span></article>
+      </div>
+    </section>
+
+    <section id="evomap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">05 · EvoMap A2A 融合</p>
+          <h2>把一次踩坑，压缩成可继承经验。</h2>
+        </div>
+        <p>这对应 The Forge 赛道：多个 Agent 通过 EvoMap 共享失败经验和成功策略，让群体获得免疫能力。</p>
+      </div>
+      <div class="wide-card">
+        <div class="a2a">
+          <div class="node"><div><b>节点 A</b><span>发现 relay-x 降智<br>生成 Gene + Capsule</span></div></div>
+          <div class="line"><i></i></div>
+          <div class="node"><div><b>EvoMap Hub</b><span>hello → validate → publish<br>asset_id 可查</span></div></div>
+          <div class="line"><i></i></div>
+          <div class="node"><div><b>节点 B</b><span>继承经验<br>提前避开风险端点</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">06 · 技术架构</p>
+          <h2>从模型探测到 Agent 代理，链路完整闭合。</h2>
+        </div>
+        <p>核心工程是 TypeScript pnpm monorepo：探测、判定、自愈、广播和展示分层清晰。</p>
+      </div>
+      <div class="arch">
+        <div class="layer"><h3>Probe</h3><ul><li>OpenAI-compatible</li><li>Anthropic adapter</li><li>质量判分与指纹</li></ul></div>
+        <div class="layer"><h3>Drift Engine</h3><ul><li>baseline</li><li>三信号检测</li><li>Elo 声誉</li></ul></div>
+        <div class="layer"><h3>GEP Router</h3><ul><li>七步自愈</li><li>genes.json</li><li>70/30 权重</li></ul></div>
+        <div class="layer"><h3>EvoMap</h3><ul><li>Gene/Capsule</li><li>validate/publish</li><li>sanitize gate</li></ul></div>
+        <div class="layer"><h3>Server</h3><ul><li>Fastify REST</li><li>SSE events</li><li>SQLite 状态</li></ul></div>
+        <div class="layer"><h3>Dashboard</h3><ul><li>中文 UI</li><li>雷达图</li><li>发布闸面板</li></ul></div>
+        <div class="layer"><h3>Agent Guard</h3><ul><li>/v1/models</li><li>/v1/chat/completions</li><li>路由保护</li></ul></div>
+        <div class="layer"><h3>CLI</h3><ul><li>eval/compare</li><li>evomap status</li><li>report</li></ul></div>
+      </div>
+    </section>
+
+    <section id="business">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">07 · 商业与应用潜力</p>
+          <h2>每个依赖模型的团队，都需要质量防火墙。</h2>
+        </div>
+        <p>DriftSentinel 可以从赛事 Demo 延伸为企业 Agent 的模型质量网关、模型采购监控工具和公共公评网络。</p>
+      </div>
+      <div class="grid-2">
+        <article class="card"><h3>企业 Agent 网关</h3><p>在业务 Agent 和模型供应商之间加一层自动避坑保护。</p></article>
+        <article class="card"><h3>模型采购与中转站公评</h3><p>长期记录质量、延迟、声誉，帮助团队选择更可靠供应商。</p></article>
+        <article class="card"><h3>模型质量 SRE</h3><p>把降智从“用户抱怨”提前为可观测事件和自动处置。</p></article>
+        <article class="card"><h3>EvoMap 经验网络</h3><p>让一个团队发现的风险变成生态内其他节点的预警。</p></article>
+      </div>
+    </section>
+
+    <section id="evidence">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">08 · 完成度证据</p>
+          <h2>能跑、能看、能接入、能交接。</h2>
+        </div>
+        <p>路演时要主动区分：本地闭环已验证，真实 publish 需要现场注入 EVOMAP_API_KEY 后坐实。</p>
+      </div>
+      <div class="evidence">
+        <div class="code">pnpm typecheck  ✅
+pnpm build      ✅
+pnpm test       ✅
+
+scripts/demo-offline.sh  # 8787 离线主演示
+scripts/demo-real.sh     # 8794 真实 EvoMap 亮点段
+pnpm driftsentinel -- report --format markdown</div>
+        <div class="wide-card">
+          <h3>评分标准对应</h3>
+          <p><b>EvoMap 融合度：</b>Gene/Capsule、validate、publish、节点继承。</p>
+          <p><b>技术创新：</b>三信号降智检测 + GEP 自愈 + Agent Guard。</p>
+          <p><b>商业潜力：</b>企业 Agent 质量防火墙和模型公评网络。</p>
+          <p><b>完成度：</b>可玩闭环、中文 UI、CLI、Docker、交接文档。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing" id="closing">
+      <div>
+        <p class="eyebrow">Drift Hunters</p>
+        <h2>DriftSentinel 让 Agent 不只是执行任务，而是学会避开整个群体已经踩过的坑。</h2>
+        <p>这就是 Beyond the Maze 的方向：把失败经验变成可传递的免疫记忆，把单体 Agent 的脆弱性变成网络级协作能力。</p>
+        <div class="chips" style="justify-content:center">
+          <span class="chip">发现</span>
+          <span class="chip">自愈</span>
+          <span class="chip">发布</span>
+          <span class="chip">继承</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const progress = document.getElementById("progress");
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = max <= 0 ? 0 : (window.scrollY / max) * 100;
+      progress.style.width = pct + "%";
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  </script>
+</body>
+</html>
