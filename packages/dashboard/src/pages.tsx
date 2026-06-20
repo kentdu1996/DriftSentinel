@@ -134,7 +134,7 @@ export function WatchPage({ version }: { version: number }) {
         <List rows={risky.map((r) => [r.endpointId, r.model, riskLabel(riskOf(r)), `drift=${r.driftEvents}`])} />
       </section>
       <section className="card span">
-        <CardTitle title="可信节点复核" desc="公共网络中来自其他节点的独立复核会进入共识判断；后续可作为评委看到的 A2A 协作证据。" />
+        <CardTitle title="可信节点复核" desc="公共网络中来自其他节点的独立复核会进入共识判断；后续可作为 A2A 协作的可信证据。" />
         <List rows={nodeVerdicts.data.map((v) => [v.node_id, v.endpoint_id, v.dimension, `${v.level} z=${num(v.z)}`])} />
       </section>
     </main>

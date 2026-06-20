@@ -22,7 +22,7 @@
 ### 1. 真实 publish 端到端
 - 操作:`SWARM_REMOTE=1 DRIFT_PUBLISH=1` + 真实 `config.evomap.yaml`(需配 `EVOMAP_API_KEY`)。
 - 验证点:`/a2a/publish` 返回真实 `asset_id`;在 EvoMap 上可检索到该 Gene/Capsule;Node B 能 `fetch` 到并继承。
-- 注意:消耗额度且链上资产不可回收,确认后再跑;跑通后把真实 asset_id 截图留作路演证据。
+- 注意:消耗额度且链上资产不可回收,确认后再跑;跑通后把真实 asset_id 截图留作验证证据。
 
 ### 2. 建 GitHub 仓库
 - 设备恢复后,把本发布包(README/LICENSE/.gitignore/CONTRIBUTING/ROADMAP + docs/assets)与 `packages/` 源码合并到项目根。
@@ -55,7 +55,7 @@
 
 ### 8. CI 与一键 Demo
 - 加 GitHub Actions:build + typecheck + test + 离线场景冒烟。
-- 写一键脚本:启动服务 → 注入降智 → 录制 Dashboard 自愈与继承全过程,产出路演视频。
+- 写一键脚本:启动服务 → 注入降智 → 录制 Dashboard 自愈与继承全过程,产出演示视频。
 
 ---
 

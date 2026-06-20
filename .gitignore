@@ -33,7 +33,7 @@ testsets/**/*.cache.json
 TOKENPROXY_CLIENTS_DEBUG_WIKI.md
 *.pptx
 *.pdf
-「Beyond the Maze」*.md
+「*」*.md
 .ds_backup/
 .trae/
 genes.json
